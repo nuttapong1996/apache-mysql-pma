@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+ # Apache webserver service
+  apache-server:
+    container_name: php-apache
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    restart: always 
+    volumes:
+      - ./www:/var/www/html/ # Mount the local ./www directory to /var/www/html in the container
+    ports:
+      - 8089:80 # Map port 8089 on the host to port 80 on the container 
+# mariadb (Mysql) database services
+  mysql:
+    container_name: mysql
+    image: mariadb:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Itmmsq@1 
+      MYSQL_DATABASE: sqdb
+      MYSQL_USER: sqmm #อย่าลืมเปลี่ยน username
+      MYSQL_PASSWORD: Itmmsq@1  
+    ports:
+      - "3306:3306"
+# Phpmyadmin
+  phpmyadmin:
+    container_name: pma
+    image: phpmyadmin:latest
+    ports:
+      - "8080:80"
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: sqmm
+      PMA_PASSWORD: Itmmsq@1
+    depends_on:
+      - mysql
