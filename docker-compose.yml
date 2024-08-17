@@ -19,10 +19,10 @@ services:
     image: mariadb:latest
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: Itmmsq@1 
-      MYSQL_DATABASE: sqdb
-      MYSQL_USER: sqmm #อย่าลืมเปลี่ยน username
-      MYSQL_PASSWORD: Itmmsq@1  
+      MYSQL_ROOT_PASSWORD: changeme 
+      MYSQL_DATABASE: dbname
+      MYSQL_USER: username 
+      MYSQL_PASSWORD: changeme 
     ports:
       - "3306:3306"
 # Phpmyadmin
@@ -34,7 +34,7 @@ services:
     restart: always
     environment:
       PMA_HOST: mysql
-      PMA_USER: sqmm
-      PMA_PASSWORD: Itmmsq@1
+      PMA_USER: username
+      PMA_PASSWORD: changeme
     depends_on:
       - mysql
